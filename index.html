@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+  </head>
+
+  <body>
+    <div class="content">
+      <h2>
+        How to decode QR codes by hand
+      </h2>
+      <div id="subtitle">It's easier than you'd think!</div>
+      <div id="date"> June 11, 2022</div>
+
+      <p>QR codes are everywhere! From ordering food to getting event info I'm contstantly scanning them. I've always thought they were extremely complex and only veteran programers could understand their inner workings.</p>
+      <p>However, that <b> is not </b> true! They are actaully quite simple and hopefully, after reading this article, you will have a basic understanding of how they work.</p>
+
+      <h3>What are QR codes?</h3>
+
+      <p>I'm assuming that you already know so I'm going to skip this section :) [They mostly used just for links. Add rickroll!]<p>
+
+      <h3>QR code "zones"</h3>
+      <p>Before you can decode QR codes you have to know the different parts of a QR code!<p>
+      <p>QR codes contain 3 "zones":</p>
+      <ul>
+        <li style="color: PaleVioletRed;">Camera alignment</li>
+        <li style="color: blue;">Formating data</li>
+        <li style="color: green;">Data</li>
+      </ul>
+
+      <div style="display: inline-block;">
+        <div style="border-style: solid;border-color: gray;border-width: 0px; float:left; margin-right: 50px;">
+          <canvas width = "420" height = "420" id="canvas"></canvas>
+        </div>
+
+        <div style="border-style: solid; border-color: black; border-width: 2px; float:right; display:block; padding-right:3px;">
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="grid" checked>
+          <label>Grid</label>
+          </div>
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="camera_alignment">
+          <label style="color:MediumVioletRed;">Camera alignment</label>
+          </div>
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="formating_data">
+          <label style="color:blue;">Formating data</label>
+          </div>
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="data">
+          <label style="color:green;">Data</label>
+          </div>
+
+        </div>
+
+      </div>
+
+      <p>The names are mostly self explanatory!</p>
+      <p>The <b>camera alignment</b> section is for helping cameras align the QR code correctly.</p>
+      <p>The <b>formating data</b> section contains general formating information for the QR code. This includes the error correction level and mask pattern and "Dark Module"!</p>
+      <p>The <b>data</b> section contains the actual data (Usually a hyperlink!) and all error correction partity data.</p>
+      <p>I will go over all these sections in detail.</p>
+
+      <h3>Camera alignment</h3>
+      <p>The camera alignment zone only has two parts:</p>
+      <ul>
+        <li style="color: red;">Position squares</li>
+        <li style="color: orange;">Timing belts</li>
+      </ul>
+      <p>Both of these are just so cameras can align the QR code properly so the data can be easily read. The position squares are on 3 corners of the QR code and look like this:</p>
+      <img src="position_square.png" alt="Position square!">
+      <p>The timing belts connect each position square and always alternate between black and white pixles as seen here:</p>
+      <img src="timing_belt.png" alt="Timing belt!">
+
+      <h3>Formating data</h3>
+      <p>The formating data is stored next to the camera alignment boxes. This data is:</p>
+      <ul>
+        <li style="color: blue;">Error correction format <a style="color:black;"><b>[0-9]  </b></a></li>
+        <li style="color: Lime;">Mask pattern            <a style="color:black;"><b>[10-11]</b></a></li>
+        <li style="color: red;">Error correction level   <a style="color:black;"><b>[13-14]</b></a></li>
+        <li style="color: purple;">The "Dark Module"     <a style="color:black;"><b>[]</b></a></li>
+      </ul>
+      <p>All data is duplicated for redudency. If a square has the same number its an exact copy in both positions!</b></p>
+      <div style="display: inline-block;">
+        <div style="border-style: solid;border-color: gray;border-width: 0px; float:left; margin-right: 50px;">
+          <canvas width = "420" height = "420" id="canvas2"></canvas>
+        </div>
+
+        <div style="border-style: solid; border-color: black; border-width: 2px; float:right; display:block; padding-right:3px;">
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="grid2" checked>
+          <label>Grid</label>
+          </div>
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="camera_alignment2">
+          <label style="color:MediumVioletRed;">Camera alignment</label>
+          </div>
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="formating_data2">
+          <label style="color:blue;">Formating data</label>
+          </div>
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="data2">
+          <label style="color:green;">Data</label>
+          </div>
+
+        </div>
+      </div>
+      <p>The math behind the error correction is too complicated and mostly not important (Especially for humans!) so I'm not going to give a detailed explination. Again, about half of the data is used for error correction!</p>
+      <p>[Should I talk about low medium error correction levels?]</p>
+      <p>However, the <b>mask pattern</b> is needed to properly deocde the data.</p>
+      <p>The mask pattern is to make the data less organized and easier to read. For example, can you tell how long this is?</p>
+      <p> PICTURE OF BLACK DOTS</p>
+      <p>Its hard! There are no indictators or lines so its difficult ot tell where one square ends and the next begins. Now try this:</p>
+      <p> PROPERLY FORMATED PICTURE</p>
+      <p>Much easier! Whenever you create a QR code there is an algorthem that chooses what mask pattern to use so there are as few "organized" sections as possible.</p>
+      <p>There are 7 total mask patterns that you can apply to a QR code. The three green bits indicate which to use. Once you figure out which mask pattern is being used you just have to overlay the <b>data</b> section with it. Everytime the mask pattern has a black bit you flip whatever bit below is.</p>
+
+      <img src="masks.png" alt="Masks!">
+
+      <p>MAKE A BETTER VERSON OF THIS. </p>
+
+    </div>
+  </body>
+
+</html>
