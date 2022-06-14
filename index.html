@@ -19,7 +19,7 @@
 
       <h3>What are QR codes?</h3>
 
-      <p>I'm assuming that you already know so I'm going to skip this section :) [They mostly used just for links. Add rickroll!]<p>
+      <p>[They mostly used just for links other basic information.]<p>
 
       <h3>QR code "zones"</h3>
       <p>Before you can decode QR codes you have to know the different parts of a QR code!<p>
@@ -62,9 +62,9 @@
       </div>
 
       <p>The names are mostly self explanatory!</p>
-      <p>The <b>camera alignment</b> section is for helping cameras align the QR code correctly.</p>
-      <p>The <b>formating data</b> section contains general formating information for the QR code. This includes the error correction level and mask pattern and "Dark Module"!</p>
-      <p>The <b>data</b> section contains the actual data (Usually a hyperlink!) and all error correction partity data.</p>
+      <p>The <b>camera alignment</b> (Pink) section is for helping cameras align the QR code correctly.</p>
+      <p>The <b>formating data</b> (Blue) section contains general formating information for the QR code. This includes the error correction level and mask pattern and "Dark Module"!</p>
+      <p>The <b>data</b> (Green)section contains the actual data (Usually a hyperlink!) and all error correction partity data.</p>
       <p>I will go over all these sections in detail.</p>
 
       <h3>Camera alignment</h3>
@@ -118,17 +118,60 @@
       </div>
       <p>The math behind the error correction is too complicated and mostly not important (Especially for humans!) so I'm not going to give a detailed explination. Again, about half of the data is used for error correction!</p>
       <p>[Should I talk about low medium error correction levels?]</p>
-      <p>However, the <b>mask pattern</b> is needed to properly deocde the data.</p>
-      <p>The mask pattern is to make the data less organized and easier to read. For example, can you tell how long this is?</p>
-      <p> PICTURE OF BLACK DOTS</p>
-      <p>Its hard! There are no indictators or lines so its difficult ot tell where one square ends and the next begins. Now try this:</p>
-      <p> PROPERLY FORMATED PICTURE</p>
-      <p>Much easier! Whenever you create a QR code there is an algorthem that chooses what mask pattern to use so there are as few "organized" sections as possible.</p>
-      <p>There are 7 total mask patterns that you can apply to a QR code. The three green bits indicate which to use. Once you figure out which mask pattern is being used you just have to overlay the <b>data</b> section with it. Everytime the mask pattern has a black bit you flip whatever bit below is.</p>
+      <p>However, the <b>mask pattern</b> (Lime green) <i>is</i> needed to properly deocde the data.</p>
+      <p>A mask is used to make the data less "organized" and easier to read. Its easiest to show this with a picture! Can you tell how many boxes wide this is?</p>
+      <img src="mask_1.png">
+      <p>Its kind of hard! There is no way to tell where one square ends and the next begins. Now try this:</p>
+      <img src="mask_3.png">
+      <p>Much easier! Whenever you create a QR code there is an algorthem that chooses a mask pattern that minimzes the amount of continues colors.</p>
+      <p>In the case above, I used mask pattern <b>101</b> which flips every other box to the opposite color. The picture below shows which ones I flipped to follow that mask pattern (F means the box was flipped):</p>
+      <img src="mask_2.png">
+      <p>There are 7 total mask patterns that you can apply to a QR code. The three lime green boxes indicate which one to use. Once you figure out which mask pattern is being used you just have to overlay the <b>data</b> section with it! Everytime the mask pattern has a black box you flip the color of the box below it.</p>
 
       <img src="masks.png" alt="Masks!">
 
-      <p>MAKE A BETTER VERSON OF THIS. </p>
+      <p>The animation below shows the process of decoding the QR code. In this case the mask is still <b>101</b> so we just flip every other <b>data</b> box (Igore all <b>camera alignment</b> and <b>formating data</b> sections)! </p>
+      <button id = "animationstartbutton" type="button">Click to start animation!</button>
+      <p></p>
+
+      <div style="display: inline-block;">
+        <div style="border-style: solid;border-color: gray;border-width: 0px; float:left; margin-right: 50px;">
+          <canvas width = "420" height = "420" id="canvas3"></canvas>
+        </div>
+
+        <div style="border-style: solid; border-color: black; border-width: 2px; float:right; display:block; padding-right:3px;">
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="grid3" checked>
+          <label>Grid</label>
+          </div>
+
+          <div>
+          <input type="checkbox" class="checkbox1" id="camera_alignment3">
+          <label style="color:MediumVioletRed;">Camera alignment</label>
+          </div>
+
+          <div>
+            <div>Speed:</div>
+            <input id = "speedslider" type="range" min="50" max="1000" value="500">
+          </div>
+
+        </div>
+      </div>
+      <p> MAKE A BETTER VERSON OF THIS. Show where to find the mask pattern again and also talk about skipping the timing belts. </p>
+      <p> Also add picture alightment color and format data colors </p>
+
+      <h3>Reading Binary</h3>
+      <p>Before we are able to read the <b>data</b> we need to understand how to read binary! Luckily, its not difficult.</p>
+      <p>As you probably know, binary is just a buncy of ones and zeros. We call each one or zero a <b>bit</b>! For example 101001 would be 6 <b>bits</b>. Because our QR code is an image and not a string of numbers we represent 1's as black boxes and 0s as white (Think of it like white being the default (0) and black being "on" (1)).</p>
+      <p>One bit by itself can't store much (Only 1 or 0!) so we combine a set of <b>bits</b> into. In our case we will be These bytes will each represent one number or letter!</p>
+      <p></p>
+      <p>This is what a QR code looks like when its split up into the different sections:</p>
+      <img src="qr_code_data_layout.png" alt="QR code!">
+      <p>The actaul data is in the 1 <b>byte</b> sections but there are also some 4 bit sections (Called <b>nibbles</b>!). They are just for giving the encoding type of the data and to indicate where the data ends and the error correction starts. </p>
+      <p>[Add taking about which direction read the binary.]</p>
+      <p>[Talk about how to read the binary + table to use.]</p>
+
 
     </div>
   </body>
