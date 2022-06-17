@@ -91,6 +91,28 @@ raw_overlay_3 = `,,,,,,,,,1,,1,,,,,,,,,
 ,,,,,,,,,1,,1,,1,,1,,1,,1,
 ,,,,,,,,,,1,,1,,1,,1,,1,,1`
 
+raw_overlay_4 = `2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,2,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,2,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,2,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,2,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,2,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,2,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,3,3,3,3,3,2,2,2,2,2,2,2,2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,2,2,2,2,2,2,2,2
+5,5,5,5,5,5,3,5,5,14;8,14;8,14;8,14;8,5,5,5,5,5,5,5,5
+14;8,14;8,14;8,14;8,14;8,14;8,3,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,12;4,12;4,12;4,12;4
+14;8,14;8,14;8,14;8,14;8,14;8,3,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,12;4,12;4,12;4,12;4
+14;8,14;8,14;8,14;8,14;8,14;8,3,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,13;5,13;5,11;3,11;3
+14;8,14;8,14;8,14;8,14;8,14;8,3,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,13;5,13;5,11;3,11;3
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,13;5,13;5,11;3,11;3
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,13;5,13;5,11;3,11;3
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,11;6,11;6,10;2,10;2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,11;6,11;6,10;2,10;2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,11;6,11;6,10;2,10;2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,11;6,11;6,10;2,10;2
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,15;7,15;7,9;1,9;1
+2,2,2,2,2,2,2,2,5,14;8,14;8,14;8,14;8,14;8,14;8,14;8,14;8,15;7,15;7,9;1,9;1`
+
 class QR_code_list {
   constructor(qr_code_list) {
     this.qr_code_list = qr_code_list
@@ -324,7 +346,7 @@ class QRcode {
 
             if(number_value != undefined) {
               // Can't see white on lime
-              if( color_value == 7 ) {
+              if( color_value == 7) {
                 this.drawText(x,y,"black",number_value)
               } else {
                 this.drawText(x,y,"white",number_value)
@@ -366,6 +388,7 @@ class QRcode {
 canvas = document.getElementById("canvas");
 canvas2 = document.getElementById("canvas2");
 canvas3 = document.getElementById("canvas3");
+canvas4 = document.getElementById("canvas4");
 
 checkbox_id_list_1 = [
   [2, "#camera_alignment", "PaleVioletRed"],
@@ -389,10 +412,29 @@ checkbox_id_list_3 = [
   [3, "#camera_alignment3", "orange"],
 ]
 
+checkbox_id_list_4 = [
+  [2, "#camera_alignment4", "PaleVioletRed"],
+  [3, "#camera_alignment4", "orange"],
+  //[4, "#data2", "green"],
+  [5, "#formating_data4", "blue"],
+  [6, "#formating_data4", "purple"],
+  [7, "#formating_data4", "Lime"],
+  [8, "#formating_data4", "red"],
+
+  [9, "#data4", "CornflowerBlue"],
+  [10,"#data4", "Crimson"],
+  [11,"#data4", "ForestGreen"],
+  [12,"#data4", "#156315"],
+  [13,"#data4","#0f3f0f"],
+  [14,"#data4", "Coral"],
+  [15,"#data4",  "DarkMagenta"]
+]
+
 qr_code_1 = new QRcode(canvas, raw_data, raw_overlay_1, checkbox_id_list_1, "#grid")
 qr_code_2 = new QRcode(canvas2, raw_data, raw_overlay_2, checkbox_id_list_2, "#grid2")
+qr_code_3 = new QRcode(canvas4, raw_data, raw_overlay_4, checkbox_id_list_4, "#grid4")
 
-the_list = new QR_code_list([qr_code_1, qr_code_2])
+the_list = new QR_code_list([qr_code_1, qr_code_2, qr_code_3])
 
 animatedQRcode_1 = new AnimatedQRcode(canvas3, raw_data, raw_overlay_3)
 
