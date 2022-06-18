@@ -126,12 +126,12 @@
       <p>Much easier! Whenever you create a QR code there is an algorthem that chooses a mask pattern that minimzes the amount of continues colors.</p>
       <p>In the case above, I used mask pattern <b>black white black</b> (101 in binary) which flips every other box to the opposite color. The picture below shows which ones I flipped to follow that mask pattern (F means the box was flipped):</p>
       <img src="mask_2.png">
-      <p>There are 7 total mask patterns that you can apply to a QR code. The three lime green boxes indicate which one to use. Once you figure out which mask pattern is being used you just have to overlay the <b>data</b> section with it! Everytime the mask pattern has a black box you flip the color of the box below it.</p>
+      <p>There are 7 total mask patterns that you can apply to a QR code. The three lime green boxes indicate which one to use. Once you figure out which mask pattern is being used you just have to overlay the <a style="color:green;"><b>data</b></a> section with it! Everytime the mask pattern has a black box you flip the color of the box below it.</p>
 
       <img src="masks.png" alt="Masks!">
 
-      <p>The animation below shows the process of decoding the QR code. In this case the mask is still <b>101</b> so we just flip every other <b>data</b> box (Igore all <b>camera alignment</b> and <b>formating data</b> sections)! </p>
-      <p>First, it goes over every single <b>data</b> square and puts an "F" where It needs to flip. It then flips all the "F" squares.</p>
+      <p>The animation below shows the process of decoding the QR code. In this case the mask is still <b>101</b> so we just flip every other <a style="color:green;"><b>data</b></a> box (Igore all <a style="color:MediumVioletRed;"><b>camera alignment</b></a> and <a style="color:blue;"><b>formating data</b></a> sections)! </p>
+      <p>First, it goes over every single <a style="color:MediumVioletRed;"><b>data</b></a> square and puts an "F" where It needs to flip. It then flips all the "F" squares.</p>
       <button id = "animationstartbutton" type="button">Click to start animation!</button>
       <p></p>
 
@@ -176,7 +176,7 @@
         <li style="color: Coral;">Error correction     <a style="color:black;"><b>[8]</b></a></li>
         <i>* All shades of green are characters. They are different colors to differencate themselves.</i>
       </ul>
-
+      <p>FIX FORMATING DATA ERROR. ANIMATION ALSO DOES INCORRRECTLY DUE TO LAZY LOOPS. <b>GO TO SOURCE!!!!</b><p>
 
       <div style="display: inline-block;">
         <div style="border-style: solid;border-color: gray;border-width: 0px; float:left; margin-right: 50px;">
@@ -252,19 +252,18 @@
 
 
       </div>
-      <p>ADD NUMBER TOGGLE</p>
 
       <h3>Understaning the sections</h3>
-      <p>The first section, <b>data encoding</b> is simple! <b>Data encoding</b> is how and what data is being stored. Because you can store URLS, letters, numbers and much more in QR codes and these 4 squares tell what is in the given QR code!</p>
-      <p><b>Length</b> is just the length (In 8 square sections) of the data! In our case (length 4), the length indicates how many letters are being stored but depending on what is encoded it might not exactly match up.</p>
-      <p><b>Characters / data</b> are by far the most important parts of the QR code. These sections contain the letters or numbers that the QR code is storing. In our case, the four sections <b>[3-6]</b>, contain the letters "w","i","k" and "i"!</p>
-      <p>The last important section is the <b>end of data</b> box. This will always be four white squares (After unmasking) and just indicates where the <b>data</b> ends and the <b>error correction</b> starts. </p>
-      <p><b>Error correction</b> is too complex for this page and is mostly useless for humans so I will skip it! Wikipeda has an article here [ADD LINK] if you want to learn more.</p>
+      <p>The first section, <a style="color:cornflowerblue;"><b>data encoding</b></a> is simple! <a style="color:cornflowerblue;"><b>Data encoding</b></a> is how and what data is being stored. Because you can store URLS, letters, numbers and much more in QR codes and these 4 squares tell what is in the given QR code!</p>
+      <p><a style="color:crimson;"><b>Length</b></a> is just the length (In 8 square sections) of the data! In our case (length 4), the length indicates how many letters are being stored but depending on what is encoded it might not exactly match up.</p>
+      <p><a style="color:ForestGreen;"><b>Characters / data</b></a> are by far the most important parts of the QR code. These sections contain the letters or numbers that the QR code is storing. In our case, the four sections <b>[3-6]</b>, contain the letters "w","i","k" and "i"!</p>
+      <p>The last important section is the <a style="color:darkmagenta;"><b>end of data</b></a> box. This will always be four white squares (After unmasking) and just indicates where the <a style="color:forestgreen;"><b>data</b></a> ends and the <a style="color:coral;"><b>error correction</b></a> starts. </p>
+      <p><a style="color:coral;"><b>Error correction</b></a> is too complex for this page and is mostly useless for humans so I will skip it! Wikipeda has an article here [ADD LINK] if you want to learn more.</p>
       <h3>Reading the squares</h3>
       <p>Now that we know what seach section represents we need to be able to actaully read them! I will skip the encoding section as it is isn't useful for decoding URLs or text.</p>
       <p>To read the squares simply use this diagram below. Technically all the squares are binary (Black is 1 and white is 0) but the diagram below is what we are going to use on this page.</p>
       <img src="diagram.png"></img>
-      <p>All you do is add up the numbers where there is a black square. For the first <b>data</b> section (<b>3</b>) the answer is just 1 + 2 + 4 + 16 + 32 + 64 = <b>119</b> (Remember, ignore all the white squares!)</p>
+      <p>All you do is add up the numbers where there is a black square. For the first  <a style="color:ForestGreen;"><b>data</b> </a> section (<b>3</b>) the answer is just 1 + 2 + 4 + 16 + 32 + 64 = <b>119</b> (Remember, ignore all the white squares!)</p>
       <img src="upexample.png"></img>
       <p>Now that we have the number assocuated with the letter we use this table to find what letter it is!</p>
       <img src="table.png"></img>
