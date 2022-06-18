@@ -62,9 +62,9 @@
       </div>
 
       <p>The names are mostly self explanatory!</p>
-      <p>The <b>camera alignment</b> (Pink) section is for helping cameras align the QR code correctly.</p>
-      <p>The <b>formating data</b> (Blue) section contains general formating information for the QR code. This includes the error correction level and mask pattern and "Dark Module"!</p>
-      <p>The <b>data</b> (Green)section contains the actual data (Usually a hyperlink!) and all error correction partity data.</p>
+      <p>The <a style="color:MediumVioletRed;"><b>camera alignment</b></a> section is for helping cameras align the QR code correctly.</p>
+      <p>The <a style="color:blue;"><b>formating data</b></a> section contains general formating information for the QR code. This includes the error correction level and mask pattern and "Dark Module"!</p>
+      <p>The <a style="color:green;"><b>data</b></a> section contains the actual data (Usually a hyperlink!) and all error correction partity data.</p>
       <p>I will go over all these sections in detail.</p>
 
       <h3>Camera alignment</h3>
@@ -116,15 +116,15 @@
 
         </div>
       </div>
-      <p>The math behind the error correction is too complicated and mostly not important (Especially for humans!) so I'm not going to give a detailed explination. About half of the data area is used for error correction.</p>
+      <p>The math behind the error correction is too complicated and mostly not important (Especially for humans!) so I'm not going to give a detailed explination.</p>
       <p>[Should I talk about low medium error correction levels?]</p>
-      <p>However, the <b>mask pattern</b> (Lime green) <i>is</i> needed to properly deocde the data.</p>
+      <p>However, the <a style="color:Lime;"><b>mask pattern</b></a> (Lime green) <i>is</i> needed to properly deocde the data.</p>
       <p>A mask is used to make the data less "organized" and easier to read. Its easiest to show this with a picture! Can you tell how many boxes wide this is?</p>
       <img src="mask_1.png">
       <p>Its kind of hard! There is no way to tell where one square ends and the next begins. Now try this:</p>
       <img src="mask_3.png">
       <p>Much easier! Whenever you create a QR code there is an algorthem that chooses a mask pattern that minimzes the amount of continues colors.</p>
-      <p>In the case above, I used mask pattern <b>101</b> which flips every other box to the opposite color. The picture below shows which ones I flipped to follow that mask pattern (F means the box was flipped):</p>
+      <p>In the case above, I used mask pattern <b>black white black</b> (101 in binary) which flips every other box to the opposite color. The picture below shows which ones I flipped to follow that mask pattern (F means the box was flipped):</p>
       <img src="mask_2.png">
       <p>There are 7 total mask patterns that you can apply to a QR code. The three lime green boxes indicate which one to use. Once you figure out which mask pattern is being used you just have to overlay the <b>data</b> section with it! Everytime the mask pattern has a black box you flip the color of the box below it.</p>
 
@@ -177,6 +177,7 @@
         <i>* All shades of green are characters. They are different colors to differencate themselves.</i>
       </ul>
 
+
       <div style="display: inline-block;">
         <div style="border-style: solid;border-color: gray;border-width: 0px; float:left; margin-right: 50px;">
           <canvas width = "420" height = "420" id="canvas4"></canvas>
@@ -200,60 +201,78 @@
           </div>
 
           <div>
-          <input type="checkbox" class="checkbox1" id="data4">
+          <input onclick="
+            allcheckboxesbelow = document.querySelectorAll('.numberstuff')
+            thisbox = document.querySelectorAll('#data4')[0]
+
+            function checkbox(item, index) {
+              item.checked = thisbox.checked
+            }
+            allcheckboxesbelow.forEach(checkbox)
+          "
+
+          type="checkbox" class="checkbox1" id="data4">
           <label style="color:green;">Data</label>
           </div>
 
+          <div style="margin-left:20px;">
+          <input type="checkbox" class="numberstuff" id="nine" checked>
+          <label style="color:black;">1</label>
+          </div>
+          <div style="margin-left:20px;">
+          <input type="checkbox" class="numberstuff" id="ten" checked>
+          <label style="color:black;">2</label>
+          </div>
+          <div style="margin-left:20px;">
+          <input type="checkbox" class="numberstuff" id="eleven" checked>
+          <label style="color:black;">3</label>
+          </div>
+          <div style="margin-left:20px;">
+          <input type="checkbox" class="numberstuff" id="twelve" checked>
+          <label style="color:black;">4</label>
+          </div>
+          <div style="margin-left:20px;">
+          <input type="checkbox" class="numberstuff" id="thirteen" checked>
+          <label style="color:black;">5</label>
+          </div>
+          <div style="margin-left:20px;">
+          <input type="checkbox" class="numberstuff" id="fourteen" checked>
+          <label style="color:black;">6</label>
+          </div>
+          <div style="margin-left:20px;">
+          <input type="checkbox" class="numberstuff" id="fifteen" checked>
+          <label style="color:black;">7</label>
+          </div>
+          <div style="margin-left:20px;">
+          <input type="checkbox" class="numberstuff" id="sixteen" checked>
+          <label style="color:black;">8</label>
+          </div>
+
         </div>
+
+
       </div>
-      <p><b><i>THIS IS STILL THE MASKED DATA! NEED TO SWITCHED TO UNMASKED!!!!!!!!!!!!!!!!!!!</b></i></p>
-      <p>Also make sure to add number toggle :)</p>
+      <p>ADD NUMBER TOGGLE</p>
 
       <h3>Understaning the sections</h3>
       <p>The first section, <b>data encoding</b> is simple! <b>Data encoding</b> is how and what data is being stored. Because you can store URLS, letters, numbers and much more in QR codes and these 4 squares tell what is in the given QR code!</p>
       <p><b>Length</b> is just the length (In 8 square sections) of the data! In our case (length 4), the length indicates how many letters are being stored but depending on what is encoded it might not exactly match up.</p>
-      <p><b>Characters / data</b> is by far the most important part of the QR code. These sections contain the letters or numbers that actaully make up the</p>
-      <h3>Readin the squares</h3>
-      <p>Now that we know what the firt two squares represent we need to be able to actaully read them! I will skip the encoding section as it is isn't useful for decoding URLs or text.</p>
-      <p>To read the squares</p>
-
-
-
-      <p>All the data stored in the QR code is in binary. The black squares are ones and the white squares are zeros! However, explaining binary is too complex of a topic for this page so I'm going to give you an easier way of reading the data from the QR code.</p>
-      <p>First, look at the diagram below. This diagram has the basic structure of all QR codes! The first four squares are for encoding mode (e.g is the QR code storing a number, URL, or something else!)</p>
-      <p>The next 8 squares tell you the length of the data stored. In our case, each rectangle only stores one letter so this is the length of our word!</p>
-
-      <p>Lets see how long our word is in our QR code!</p>
-
-      <p>QR code is opposite direction. AKA 128 is at 1 instead of 8...</p>
-
-
-      <p>Before we are able to read the <b>data</b> we need to understand how to read binary! Luckily, its not difficult.</p>
-
-      <p>As you probably know, binary is just a buncy of ones and zeros. We call each one or zero a <b>bit</b>! For example 101001 would be 6 <b>bits</b>. Because our QR code is an image and not a string of numbers we represent 1's as black boxes and 0s as white (Think of it like white being the default (0) and black being "on" (1)).</p>
-      <p>One bit by itself can't store much (Only 1 or 0!) so we combine a set of <b>bits</b> into. In our case we will be These bytes will each represent one number or letter!</p>
-      <img src="bitsandstuff.png">&nbsp;&nbsp;&nbsp;<i>  This would be <b>10011</b></i></img>
-
-      <p>This is what a QR code looks like when its split up into the different sections:</p>
-      <img src="qr_code_data_layout.png" alt="QR code!"></img>
-
-      <p>The actaul data is in the 1 <b>byte</b> sections but there are also some 4 bit sections (Called <b>nibbles</b>!). They are just for giving the encoding type of the data and to indicate where the data ends and the error correction starts. </p>
-      <img src="direction.png"></img>
-      <p>The image above shows you what direction to read the binary! Depending on the direction, the order of the bits is different.</p>
-      <img src="order.png"><i>This would be <b>01100001</b></i></img>
-      <p>Technically this is good enough! If you look up <b>01100001</b> you'll see its the letter "a" which is correct. However, this is a sort of impractical! A better way to do this is to add up the squares and use a table.</p>
-      <img src="numbers.png"><i>Adding all the black bits up you get 1 + 32 + 64 = 97</i></img>
-      <p>Using this table we can look up 97 and we get "a"! This method is a little more practical as you can also use it to get the length of the text from the second QR code data point</p>
+      <p><b>Characters / data</b> are by far the most important parts of the QR code. These sections contain the letters or numbers that the QR code is storing. In our case, the four sections <b>[3-6]</b>, contain the letters "w","i","k" and "i"!</p>
+      <p>The last important section is the <b>end of data</b> box. This will always be four white squares (After unmasking) and just indicates where the <b>data</b> ends and the <b>error correction</b> starts. </p>
+      <p><b>Error correction</b> is too complex for this page and is mostly useless for humans so I will skip it! Wikipeda has an article here [ADD LINK] if you want to learn more.</p>
+      <h3>Reading the squares</h3>
+      <p>Now that we know what seach section represents we need to be able to actaully read them! I will skip the encoding section as it is isn't useful for decoding URLs or text.</p>
+      <p>To read the squares simply use this diagram below. Technically all the squares are binary (Black is 1 and white is 0) but the diagram below is what we are going to use on this page.</p>
+      <img src="diagram.png"></img>
+      <p>All you do is add up the numbers where there is a black square. For the first <b>data</b> section (<b>3</b>) the answer is just 1 + 2 + 4 + 16 + 32 + 64 = <b>119</b> (Remember, ignore all the white squares!)</p>
+      <img src="upexample.png"></img>
+      <p>Now that we have the number assocuated with the letter we use this table to find what letter it is!</p>
       <img src="table.png"></img>
-      <p>[FIX ABOVE SENTENCE]</p>
+      <p><b>119</b> is "w" so that is correct!</p>
+      <p>Lets do the second character next (4). Because this one is sideways, and going from up to down, we must use the correct diagram (Up to Down).</p>
+      <p>1 + 8 + 32 + 64 = 105 which is "i" in the table and the correct letter.</p>
+      <img src="uptodownexample.png"></img>
 
-      <!-->
-        1. Make sure understand what binary is.
-        2. Explain how 1, 0 is black and white in QR code
-        3. Explain the layout of the QR code. (e.g enc, then length, then 8 bit segments)
-        4. Explain how to read it. Different direction is different order
-        5. Explain how to add up (1 + 32 + 64) and to use table.
-      <-->
 
     </div>
   </body>
