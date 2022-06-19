@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 
+<!-- TODO:
+
+  FIX BUG WITH QR CODE DISPLAY - DONE
+  CLEAN UP QR CODE DISPLAYS AS SOME STUFF ISNT QUITE IMPLIMENTED OR WORKING. - DONE
+  !!! REALLY IMPORTANT !!! ADD SECTION TO READ THE LENGTH - DONE
+  ONE MORE READ OVER
+
+-->
 <html>
   <head>
     <link rel="stylesheet" href="style.css">
@@ -12,22 +20,25 @@
         How to decode QR codes by hand
       </h2>
       <div id="subtitle">It's easier than you'd think!</div>
-      <div id="date"> June 11, 2022</div>
+      <div id="date"> June 19, 2022</div>
 
       <p>QR codes are everywhere! From ordering food to getting event info, I'm contstantly scanning these little black and white boxes. I've always thought they were extremely complex and only veteran programers could understand their inner workings.</p>
       <p>However, that <b> is not </b> true! They are actaully quite simple and hopefully, after reading this article, you will have a basic understanding of how they work.</p>
 
       <h3>What are QR codes?</h3>
 
-      <p>Usually they are just links to websites.<p>
+      <p>Most QR codes you will encouter on a daily basis are just links to websites. Scanning one would be equivlient to clicking <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">this link</a>. However, they can also be other things like automatic WiFi login codes, app store links, and even business cards!<p>
+
+      <p>The QR code we decode on this page is 21 by 21 pixels (Each black or white square is one pixel!) and says "wiki" and isn't a link. Most phones deal with this in slightly different ways so give the QR code below a scan and see what happens!</p>
 
       <h3>QR code "zones"</h3>
       <p>Before you can decode QR codes you have to know the different parts of a QR code.<p>
       <p>QR codes contain 3 "zones":</p>
       <ul>
-        <li style="color: PaleVioletRed;">Camera alignment</li> (Including timing belts MAKE COLOR)
+        <li style="color: PaleVioletRed;">Camera alignment <a style="color:black;">*</a> </li>
         <li style="color: blue;">Formating data</li>
         <li style="color: green;">Data</li>
+        <i>* Includes <a style="color: orange;">Timing belts</a> </i>
       </ul>
 
       <div style="display: inline-block;">
@@ -38,13 +49,13 @@
         <div style="border-style: solid; border-color: black; border-width: 2px; float:right; display:block; padding-right:3px;">
 
           <div>
-          <input type="checkbox" class="checkbox1" id="grid" checked>
+          <input type="checkbox" class="checkbox1" id="grid">
           <label>Grid</label>
           </div>
 
           <div>
           <input type="checkbox" class="checkbox1" id="camera_alignment">
-          <label style="color:MediumVioletRed;">Camera alignment</label>
+          <label style="color:PaleVioletRed;">Camera alignment</label>
           </div>
 
           <div>
@@ -60,25 +71,24 @@
         </div>
 
       </div>
-CAHNGE TO ORANGE TIMING BELTS
+
       <p>The names are mostly self explanatory;</p>
-      <p>The <a style="color:MediumVioletRed;"><b>camera alignment</b></a> section is for helping cameras align the QR code correctly.</p>
-      <p>The <a style="color:blue;"><b>formating data</b></a> section contains general formating information for the QR code. This includes the error correction level, mask pattern and the "Dark Module" (See purple square in the QR code diagram above)!</p>
+      <p>The <a style="color:PaleVioletRed;"><b>camera alignment</b></a> section is for helping cameras align the QR code correctly.</p>
+      <p>The <a style="color:blue;"><b>formating data</b></a> section contains general formating information for the QR code. This includes the error correction level, mask pattern and the "<a style="color:purple;">Dark Module"</a> (See purple pixel in the QR code diagram above)!</p>
       <p>The <a style="color:green;"><b>data</b></a> section contains the actual data (Usually a hyperlink) and all error correction parity data.</p>
       <p>I will go over all these sections in detail.</p>
 
-      <h3><a style="color:MediumVioletRed">Camera alignment</a></h3>
+      <h3><a style="color:PaleVioletRed">Camera alignment</a></h3>
       <p>The camera alignment zone only has two parts:</p>
       <ul>
-        <li style="color: red;">Position squares</li>
+        <li style="color: PaleVioletRed;">Position pixel</li>
         <li style="color: orange;">Timing belts</li>
       </ul>
-      <p>Both of these exist so cameras can align the QR code properly in order for the data to be easily read. The <a style="color:pink;">position squares</a> (Shown in pink in the diagram above) are on 3 corners of the QR code. Note that the bottom right doesn't contain a position square COLOR. This helps the camera know which way is is oriented.</p>
+      <p>Both of these exist so cameras can align the QR code properly in order for the data to be easily read. The <a style="color:PaleVioletRed;">position pixel</a> (Shown in pink in the diagram above) are on 3 corners of the QR code. Note that the bottom right doesn't contain a <a style="color:PaleVioletRed;">position square</a>. This helps the camera know which way is is oriented.</p>
 
-      <p>The timing belts (Shown in orange in the diagram above) connect each position square COLOR and always alternate between black and white pixels.</p>
-      <img src="timing_belt.png" alt="Timing belt!">
+      <p>The <a style="color: orange;"><b>timing belts</b></a> (Shown in orange in the diagram above) connect each <a style="color:PaleVioletRed;">position square</a> and always alternate between black and white pixels.</p>
 
-      <h3>Formating data</h3>
+      <h3 style="color:blue;">Formating data</h3>
       <p>The formating data is stored next to the camera alignment boxes. This data is:</p>
       <ul>
         <li style="color: blue;">Error correction format <a style="color:black;"><b>[0-9]  </b></a></li>
@@ -86,7 +96,7 @@ CAHNGE TO ORANGE TIMING BELTS
         <li style="color: red;">Error correction level   <a style="color:black;"><b>[13-14]</b></a></li>
         <li style="color: purple;">The "Dark Module"     <a style="color:black;"><b>[]</b></a></li>
       </ul>
-      <p>All data is duplicated for redundency. If a square has the same number it is an exact copy in both positions!</b></p>
+      <p>All data is duplicated for redundency. If a pixel has the same number it is an exact copy in both positions!</b></p>
       <div style="display: inline-block;">
         <div style="border-style: solid;border-color: gray;border-width: 0px; float:left; margin-right: 50px;">
           <canvas width = "420" height = "420" id="canvas2"></canvas>
@@ -95,7 +105,7 @@ CAHNGE TO ORANGE TIMING BELTS
         <div style="border-style: solid; border-color: black; border-width: 2px; float:right; display:block; padding-right:3px;">
 
           <div>
-          <input type="checkbox" class="checkbox1" id="grid2" checked>
+          <input type="checkbox" class="checkbox1" id="grid2">
           <label>Grid</label>
           </div>
 
@@ -116,22 +126,22 @@ CAHNGE TO ORANGE TIMING BELTS
 
         </div>
       </div>
-      <p>The math behind the error correction COLOR is too complicated and mostly not important (Especially for humans!) so I'm not going to give a detailed explanation.</p>
+      <p>The math behind the <a style="color:red;"><b>error correction</b></a> / <a style="color:blue;"><b>formating data</b></a>  is too complicated and mostly not important (Especially for humans!) so I'm not going to give a detailed explanation.</p>
 
       <p>However, the <a style="color:Lime;"><b>mask pattern</b></a> <i>is</i> needed to properly decode the data.</p>
       <p>A mask is used to make the data less "organized" and easier to read. Its easiest to show this with a picture! Can you tell how many boxes wide this is?</p>
       <img src="mask_1.png">
-      <p>Its kind of hard! There is no way to tell where one square ends and the next begins. Now try this:</p>
+      <p>Its kind of hard! There is no way to tell where one pixel ends and the next begins. Now try this:</p>
       <img src="mask_3.png">
-      <p>Much easier! Whenever you create a QR code there is an algorithm that chooses a mask pattern which minimizes the amount of continuous colors.</p>
-      <p>In the case above, I used mask pattern <b>black white black</b> (101 in binary) which flips every other box to the opposite color. The picture below shows which ones were flipped to follow that mask pattern (F means the box was flipped):</p>
+      <p>Much easier! Whenever you create a QR code there is an algorithm that chooses a <a style="color:Lime;"><b>mask pattern</b></a> which minimizes the amount of continuous colors.</p>
+      <p>In the case above, I used <a style="color:Lime;"><b>mask pattern</b></a> <b>black white black</b> (101 in binary) which flips every other box to the opposite color. The picture below shows which ones were flipped to follow that <a style="color:Lime;"><b>mask pattern</b></a> (F means the box was flipped):</p>
       <img src="mask_2.png">
-      <p>There are 8 total mask patterns that you can apply to a QR code. The three lime green boxes indicate which one to use. Once you figure out which mask pattern is being used you just have to overlay the <a style="color:green;"><b>data</b></a> section with it! Everytime the mask pattern has a black box, you flip the color of the box below it.</p>
+      <p>There are 8 total <a style="color:Lime;"><b>mask patterns</b></a> that you can apply to a QR code. The three lime green boxes indicate which one to use. Once you figure out which <a style="color:Lime;"><b>mask pattern</b></a> is being used you just have to overlay the <a style="color:green;"><b>data</b></a> section with it! Everytime the mask pattern has a black box, you flip the color of the box below it.</p>
 
       <img src="masks.png" alt="Masks!">
 
       <p>The animation below shows the process of umasking the QR code. In this case the mask is still <b>black white black</b> (101 in binary) so we just flip every other <a style="color:green;"><b>data</b></a> box (Igore all <a style="color:MediumVioletRed;"><b>camera alignment</b></a> and <a style="color:blue;"><b>formating data</b></a> sections)! </p>
-      <p>First, it goes over every single <a style="color:MediumVioletRed;"><b>data</b></a> square and puts an "F" where It needs to flip. It then flips all the "F" squares.</p>
+      <p>First, it goes over every single <a style="color:MediumVioletRed;"><b>data</b></a> pixel and puts an "F" where It needs to flip. It then flips all the "F" pixels.</p>
       <button id = "animationstartbutton" type="button">Click to start animation!</button>
       <p></p>
 
@@ -141,29 +151,18 @@ CAHNGE TO ORANGE TIMING BELTS
         </div>
 
         <div style="border-style: solid; border-color: black; border-width: 2px; float:right; display:block; padding-right:3px;">
-
-          <div>
-          <input type="checkbox" class="checkbox1" id="grid3" checked>
-          <label>Grid</label>
-          </div>
-
-          <div>
-          <input type="checkbox" class="checkbox1" id="camera_alignment3">
-          <label style="color:MediumVioletRed;">Camera alignment</label>
-          </div>
-
           <div>
             <div>Speed:</div>
             <input id = "speedslider" type="range" min="50" max="1000" value="500">
           </div>
-
         </div>
       </div>
+      <!--
       <p>ADD TOGGLE TO TURN ON AND OFF NUMBERS!</p>
       <p> MAKE A BETTER VERSON OF THIS. Show where to find the mask pattern again and also talk about skipping the timing belts. </p>
       <p> Also add picture alightment color and format data colors </p>
-
-      <h3>Reading the data</h3>
+      -->
+      <h3>Reading the <a style="color:green;">data</a></h3>
 
       <p>We have now unmasked the data! All there is left to do is to read the data itself.</p>
       <p>I've made a graphical representation of the data below.</p>
@@ -176,7 +175,6 @@ CAHNGE TO ORANGE TIMING BELTS
         <li style="color: Coral;">Error correction     <a style="color:black;"><b>[8]</b></a></li>
         <i>* All shades of green are characters. They are different colors to differencate themselves.</i>
       </ul>
-      <p>FIX FORMATING DATA ERROR. ANIMATION ALSO DOES INCORRRECTLY DUE TO LAZY LOOPS. <b>GO TO SOURCE!!!!</b><p>
 
       <div style="display: inline-block;">
         <div style="border-style: solid;border-color: gray;border-width: 0px; float:left; margin-right: 50px;">
@@ -186,7 +184,7 @@ CAHNGE TO ORANGE TIMING BELTS
         <div style="border-style: solid; border-color: black; border-width: 2px; float:right; display:block; padding-right:3px;">
 
           <div>
-          <input type="checkbox" class="checkbox1" id="grid4" checked>
+          <input type="checkbox" class="checkbox1" id="grid4">
           <label>Grid</label>
           </div>
 
@@ -255,24 +253,35 @@ CAHNGE TO ORANGE TIMING BELTS
 
       <h3>Understaning the sections</h3>
       <p>The first section, <a style="color:cornflowerblue;"><b>data encoding</b></a> is simple! <a style="color:cornflowerblue;"><b>Data encoding</b></a> is how and what data is being stored. Because you can store URLS, letters, numbers and much more in QR codes these 4 pixels tell what is in the given QR code!</p>
-      <p><a style="color:crimson;"><b>Length</b></a> is just the length (In 8 square sections) of the data! In our case (length 4), the length indicates how many letters are being stored but depending on what is encoded it might not exactly match up.</p>
+      <p><a style="color:crimson;"><b>Length</b></a> is just the length (In 8 pixel sections) of the data! In our case (length 4), the length indicates how many letters are being stored but depending on what is encoded it might not exactly match up.</p>
       <p><a style="color:ForestGreen;"><b>Characters / data</b></a> are by far the most important parts of the QR code. These sections contain the letters or numbers that the QR code is storing. In our case, the four sections <b>[3-6]</b>, contain the letters "w","i","k" and "i"!</p>
-      <p>The last important section is the <a style="color:darkmagenta;"><b>end of data</b></a> box. This will always be four white squares (After unmasking) and just indicates where the <a style="color:forestgreen;"><b>data</b></a> ends and the <a style="color:coral;"><b>error correction</b></a> starts. </p>
-      <p><a style="color:coral;"><b>Error correction</b></a> is too complex for this page and, again, is mostly useless for humans so I will skip it! Wikipeda has an article here [ADD LINK] if you want to learn more.</p>
-      <h3>Reading the squares</h3>
+      <p>The last important section is the <a style="color:darkmagenta;"><b>end of data</b></a> box. This will always be four white pixels (After unmasking) and just indicates where the <a style="color:forestgreen;"><b>data</b></a> ends and the <a style="color:coral;"><b>error correction</b></a> starts. </p>
+      <p><a style="color:coral;"><b>Error correction</b></a> is too complex for this page and, again, is mostly useless for humans so I will skip it! I've linked some useful pages in the <b>resources</b> section at the end of the page if you want to learn more.</p>
+      <h3>Reading the sections</h3>
       <p>Now that we know what seach section represents we need to be able to actually read them! I will skip the encoding section as it is isn't useful for decoding URLs or text.</p>
-      <p>To read the squares simply use this diagram below. Technically all the squares are binary (Black is 1 and white is 0) but the diagram below is what we are going to use on this page. [FIX THIS]</p>
+      <p>To read the pixels simply use this diagram below. Technically all the pixels are binary (Black is 1 and white is 0) but the diagram below is what we are going to use here.</p>
       <img src="diagram.png"></img>
-      <p>All you do is add up the numbers where there is a black square. For the first  <a style="color:ForestGreen;"><b>data</b> </a> section (<b>3</b>) the answer is just 1 + 2 + 4 + 16 + 32 + 64 = <b>119</b> (Remember, ignore all the white squares!)</p>
+      <p>All you do is add up the numbers where there is a black pixel. The easiest example would be the <a style="color:Crimson"><b>length</b></a>. We already know what it should be (wiki is 4 characters long!) so its extremely easy to confirm.</p>
+      <img src="lengthexample.png"></img>
+      <p>Because the only black colored pixel is <b>4</b> the stored word is four characters long which is true! Again, if more than one was colord we would simply add them all up.</p>
+      <p>Lets do the <a style="color:ForestGreen;"><b>data</b> </a> sections next.</p>
+      <p>For the first  <a style="color:ForestGreen;"><b>data</b> </a> section (<b>3</b>) the answer is just 1 + 2 + 4 + 16 + 32 + 64 = <b>119</b> (Remember, ignore all the white pixels!)</p>
       <img src="upexample.png"></img>
       <p>Now that we have the number associated with the letter we use this table to find what letter it is!</p>
       <img src="table.png"></img>
       <p><b>119</b> is "w" which is correct!</p>
       <p>Lets do the second character next (4). Because this one is sideways, and going from up to down, we must use the correct diagram (Up to Down).</p>
-      <p>1 + 8 + 32 + 64 = 105 which is "i" in the table and the correct letter.</p>
+      <p>1 + 8 + 32 + 64 = <b>105</b> which is "i" in the table and the correct letter.</p>
       <img src="uptodownexample.png"></img>
+      <p>Try doing the last two letters yourself!</p>
 
+      <h3>Conclusion</h3>
+      <p>Hopefully after reading this you feel just a little more knowledgeable about QR codes. They aren't some magical box and are, overall, quite simple!</p>
 
+      <h3>Resources</h3>
+      <p>Wikipedia has a good page about QR codes. It goes into more detail about a lot of the stuff I touched on (This is especially true with reading the binary!). <a href="https://en.wikipedia.org/wiki/QR_code">https://en.wikipedia.org/wiki/QR_code</a></p>
+      <p>This website had most of the information Wikipedia didn't cover: <a href="https://www.swisseduc.ch/informatik/theoretische_informatik/qr_codes/docs/qr_standard.pdf">https://www.swisseduc.ch/informatik/theoretische_informatik/qr_codes/docs/qr_standard.pdf
+</a></p>
     </div>
   </body>
 
